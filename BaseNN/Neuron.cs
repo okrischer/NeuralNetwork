@@ -4,41 +4,30 @@ namespace BaseNN
 {
     public class Neuron
     {
-        private double bias;
-        private double[] weights;
+        private double _bias;
+        private double[] _weights;
 
         public Neuron(double bias, double[] weights)
         {
-            this.bias = bias;
-            this.weights = weights;
+            _bias = bias;
+            _weights = weights;
         }
 
         public double Bias
         {
-            get
-            {
-                return bias;
-            }
-            set
-            {
-                bias = value;
-            }
+            get => _bias; 
+            set => _bias = value;
         }
         public double[] Weights
         {
-            get
-            {
-                return weights;
-            }
-            set
-            {
-                weights = value;
-            }
+            get => _weights;
+            set => _weights = value;
         }
+
         public byte Feed(double[] input)
         {
             double z = 0;
-            if (input.Length != weights.Length)
+            if (input.Length != _weights.Length)
             {
                 throw new OperationCanceledException(
                     "the number of input values does not match the number of weights");
@@ -47,18 +36,13 @@ namespace BaseNN
             {
                 for (int i = 0; i < input.Length; i++)
                 {
-                    z += input[i] * weights[i];
+                    z += input[i] * _weights[i];
                 }
             }
-            z += bias;
-            if (z > 0)
-            {
-                return (byte) 1;
-            }
-            else
-            {
-                return (byte) 1;
-            }
+            z += _bias;
+            
+            if (z > 0) return (byte) 1;
+            else return (byte) 0;
         }
     }
 }
