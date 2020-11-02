@@ -4,46 +4,47 @@ using BaseNN;
 
 namespace BaseNN.Tests
 {
-    public class PerceptronTest
+    public class SimplePerceptronTest
     {
         // bias and weights for simple tests
-        double bias = -2;
-        double[] weights = {1,2};
+        static float bias = -2;
+        static float[] weights = {1,2};
+
+        // perceptron for simple tests
+        Neuron perceptron = new Neuron(bias,  weights);
 
         [Fact]
-        public void ShouldThrowException()
+        public void ShouldYieldException()
         {
-            double[] input = {2};
-            var perceptron = new Neuron(bias, weights);
+            float[] input = {1};
             try
             {
                 var result = perceptron.Feed(input);
             }
             catch (OperationCanceledException oce)
             {
-                Assert.Equal("the number of input values does not match the number of weights"
+                Assert.Equal("length of input doesn`t match length of weights"
                 , oce.Message);
             }
         }
+
         [Theory]
-        [InlineData(2,1)]
         [InlineData(1,2)]
+        [InlineData(2,1)]
         [InlineData(1,1)]
-        public void SimpleTestShouldYield1(double i1, double i2)
+        public void SimpleTestShouldYield1(float value1, float value2)
         {
-            double[] input = {i1, i2};
-            var perceptron = new Neuron(bias, weights);
+            float[] input = {value1, value2};
             var result = perceptron.Feed(input);
             Assert.Equal(1, result);
         }
         [Theory]
-        [InlineData(0,1)]
         [InlineData(1,0)]
+        [InlineData(0,1)]
         [InlineData(0,0)]
-        public void SimpleTestShouldYield0(double i1, double i2)
+        public void SimpleTestShouldYield0(float value1, float value2)
         {
-            double[] input = {i1, i2};
-            var perceptron = new Neuron(bias, weights);
+            float[] input = {value1, value2};
             var result = perceptron.Feed(input);
             Assert.Equal(0, result);
         }
