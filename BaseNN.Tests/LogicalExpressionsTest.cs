@@ -1,52 +1,38 @@
 using System;
 using Xunit;
 using BaseNN;
-using System.Collections.Generic;
+using System.Numerics;
 
 namespace BaseNN.Tests
 {
-    public static class TestData
-    {
-        // create all 4 permutations for true/false values
-        private static float[] p1q1 = {1,1};
-        private static float[] p1q0 = {1,0};
-        private static float[] p0q1 = {0,1};
-        private static float[] p0q0 = {0,0};
-        private static List<float[]> inputs = new List<float[]>();
-        public static List<float[]> GetInputs()
-        {
-            inputs.Add(p1q1);
-            inputs.Add(p1q0);
-            inputs.Add(p0q1);
-            inputs.Add(p0q0);
-
-            return inputs;
-        }
-    }
-
     public class LogicalAndTest
     {
         // bias and weights for logical `AND` tests
-        static float bias = -1.5F;
-        static float[] weights = {1,1};
-        Neuron p = new Neuron(bias,  weights);
+        static float Bias = -1.5F;
+        static float[] weights = {1,1,0,0,0,0,0,0};
+        static Vector<float> Weights = new Vector<float>(weights);
+        Neuron p = new Neuron(Bias,  Weights);
 
-
-        [Fact]
-        public void TestLogicalAndTrue()
+        [Theory]
+        [InlineData(1,1)]
+        public void TestLogicalAndYieldsTrue(float v0, float v1)
         {
-            float[] input = TestData.GetInputs()[0];
-            Assert.Equal(1, p.Feed(input));
+            float[] inputs = new float[8];
+            inputs[0] = v0;
+            inputs[1] = v1;
+            Assert.Equal(1, p.Feed(new Vector<float>(inputs)));
         }
 
-        [Fact]
-        public void TestLogicalAndFalse()
+        [Theory]
+        [InlineData(1,0)]
+        [InlineData(0,1)]
+        [InlineData(0,0)]
+        public void TestLogicalAndYieldsFalse(float v0, float v1)
         {
-            var inputs = TestData.GetInputs();
-            for (int i = 1; i < 4; i++)
-            {
-                Assert.Equal(0, p.Feed(inputs[i]));
-            }
+            float[] inputs = new float[8];
+            inputs[0] = v0;
+            inputs[1] = v1;
+            Assert.Equal(0, p.Feed(new Vector<float>(inputs)));
         }
     }
 }
