@@ -4,7 +4,7 @@ namespace BaseNN
 {
     public class Neuron
     {
-        private const byte WEIGHTSCOUNT = 2;
+        private int _weightsCount;
         private float _bias;
         private Vector<float> _weights;
 
@@ -12,6 +12,14 @@ namespace BaseNN
         {
             _bias = bias;
             _weights = weights;
+            _weightsCount = Vector<float>.Count;
+        }
+
+        public Neuron(float bias, Vector<float> weights, int weightsCount)
+        {
+            _bias = bias;
+            _weights = weights;
+            _weightsCount = weightsCount;
         }
 
         public float Bias
@@ -24,11 +32,16 @@ namespace BaseNN
             get => _weights;
             set => _weights = value;
         }
+        public int WeightsCount
+        {
+            get => _weightsCount;
+            set => _weightsCount = value;
+        }
 
         public byte Feed(Vector<float> inputs)
         {
             float z = 0;
-            for (int i = 0; i < WEIGHTSCOUNT; i++)
+            for (int i = 0; i < _weightsCount; i++)
             {
                 z += inputs[i] * _weights[i];
             }
