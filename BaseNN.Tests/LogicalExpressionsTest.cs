@@ -11,7 +11,7 @@ namespace BaseNN.Tests
         static float Bias = -1.5F;
         static float[] weights = {1,1,0,0,0,0,0,0};
         static Vector<float> Weights = new Vector<float>(weights);
-        Neuron p = new Neuron(Bias,  Weights, 2);
+        Neuron p = new Neuron(Bias,  Weights);
 
         [Theory]
         [InlineData(1,1)]
@@ -42,7 +42,7 @@ namespace BaseNN.Tests
         static float Bias = -0.5F;
         static float[] weights = {1,1,0,0,0,0,0,0};
         static Vector<float> Weights = new Vector<float>(weights);
-        Neuron p = new Neuron(Bias,  Weights, 2);
+        Neuron p = new Neuron(Bias,  Weights);
 
         [Theory]
         [InlineData(1,1)]
@@ -73,7 +73,7 @@ namespace BaseNN.Tests
         static float Bias = 0.5F;
         static float[] weights = {-1,0,0,0,0,0,0,0};
         static Vector<float> Weights = new Vector<float>(weights);
-        Neuron p = new Neuron(Bias,  Weights, 1);
+        Neuron p = new Neuron(Bias,  Weights);
 
         [Theory]
         [InlineData(0)]

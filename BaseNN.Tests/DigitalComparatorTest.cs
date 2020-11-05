@@ -17,9 +17,9 @@ namespace BaseNN.Tests
         }
         
         // create the needed perceptrons
-        Neuron And = new Neuron(-1.5F,  CreateVector(1,1), 2);
-        Neuron Nor = new Neuron(0.5F,  CreateVector(-1,-1), 2);
-        Neuron Not = new Neuron(0.5F,  CreateVector(-1), 1);
+        Neuron And = new Neuron(-1.5F,  CreateVector(1,1));
+        Neuron Nor = new Neuron(0.5F,  CreateVector(-1,-1));
+        Neuron Not = new Neuron(0.5F,  CreateVector(-1));
 
         [Theory]
         [InlineData(0,1)]
