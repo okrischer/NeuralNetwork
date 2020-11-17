@@ -1,6 +1,5 @@
 using System;
 using Xunit;
-using BaseNN;
 using System.Numerics;
 
 namespace BaseNN.Tests
@@ -55,7 +54,7 @@ namespace BaseNN.Tests
         [InlineData(0,1)]
         [InlineData(1,1)]
         [InlineData(0,0)]
-        public void TrainedOrNeuronYieldsCorrectPositiveResults (float v0, float v1)
+        public void TrainedOrNeuronYieldsCorrectResults (float v0, float v1)
         {
             // create and train the neuron
             Neuron Or = new Neuron(2, CreateVector(-1,-1));
@@ -67,7 +66,7 @@ namespace BaseNN.Tests
                 Or.Train(CreateVector(0,1), 1);
             }
             // test the neuron
-            Console.WriteLine($"OR-positive: Bias: {Or.Bias}, Weights: {Or.Weights.ToString()}");
+            Console.WriteLine($"OR-Test: Bias: {Or.Bias}, Weights: {Or.Weights.ToString()}");
             int result = Or.Feed(CreateVector(v0, v1));
             // check the result
             if (v0 == 0 & v1 == 0)
