@@ -34,8 +34,7 @@ namespace BaseNN
             }
             z += Bias;
 
-            if (z > 0) return 1;
-            else return 0;
+            return z > 0 ? 1 : 0;
         }
 
         public void Train(Vector<float> inputs, int target)
